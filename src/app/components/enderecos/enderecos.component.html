@@ -1,13 +1,16 @@
-<div class="container p-5">
-    <div class="border boder-list rounded p-5">
-        <button type="button" class="btn btn-sm btn-secondary">
-            Novo Endereço
-        </button>
+<div class="container" *ngIf="visibilidadeTabela">
+    <div class="border boder-list rounded">
+        <div>
+            <button type="button" class="btn-sm btn-secondary" (click)="exibirFormularioCadastro()">
+                Novo Endereço
+                <i class="fa-solid fa-circle-plus"></i>
+            </button>
+        </div>
+        <hr />
 
-        <hr/>
-
-        <table class="table" *ngIf="enderecos">
+        <table class="table table-striped table-hover table-sm" *ngIf="enderecos">
             <tr class="thead-light">
+                <th>ID</th>
                 <th>Nome do Reciclador</th>
                 <th>Rua</th>
                 <th>Número</th>
@@ -15,84 +18,124 @@
                 <th>Bairro</th>
                 <th>Cidade</th>
                 <th>Estador</th>
+                <th>Ações</th>
             </tr>
 
             <tr *ngFor="let endereco of enderecos">
-
-                <td>{{endereco.nome}} |</td>
-                <td>{{endereco.rua}} |</td>
-                <td>{{endereco.numero}} |</td>
-                <td>{{endereco.cep}} |</td>
-                <td>{{endereco.bairro}} |</td> 
-                <td>{{endereco.cidade}} |</td>
-                <td>{{endereco.estado}} | </td>
+                <td>{{endereco.id}}</td>
+                <td>{{endereco.nome}}</td>
+                <td>{{endereco.rua}}</td>
+                <td>{{endereco.numero}}</td>
+                <td>{{endereco.cep}}</td>
+                <td>{{endereco.bairro}}</td>
+                <td>{{endereco.cidade}}</td>
+                <td>{{endereco.estado}}</td>
                 <td>
-                    <button type="button" class="btn btn-sm btn-outline-info">Atualizar</button>
-                    <button type="button" class="btn btn-sm btn-outline-danger">Excluir</button>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="btn-light fa-solid fa-pen-to-square" type="button"
+                                (click)="exibirFormularioAtualizacao(endereco.id)">
+                            </button>
+                        </div>
+
+                        <div class="col-md-6">
+                            <button class="btn- fa-solid fa-trash-can" type="button"
+                                (click)="ExibirConfirmacaoExclusao(endereco.id, endereco.nome, conteudoModal)">
+                            </button>
+                        </div>
+
+
+                    </div>
                 </td>
             </tr>
-            
         </table>
-
     </div>
 </div>
 
-<div class="container p-5">
+<div class="containers" *ngIf="visibilidadeFormulario">
     <div class="row">
-        <div class="col-6 border border-light rounded p-5 shadow" *ngIf="formulario">
+        <div *ngIf="formulario">
             <h6>{{tituloFormulario}}</h6>
-            <hr/>
-
-            <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
-                <div class="form-group">
-                    <label>Nome do Reciclador:</label>
-                    <input type="text" class="form-control form-control-sm" formControlName="nome">
-                </div>
-
-                <div class="form-group">
-                    <label>Rua:</label>
-                    <input type="text" class="form-control form-control-sm" formControlName="rua">
-                </div>
-
-                <div class="form-group">
-                    <label>Número:</label>
-                    <input type="text" class="form-control form-control-sm" formControlName="numero">
-                </div>
-
-                <div class="form-group">
-                    <label>CEP:</label>
-                    <input type="text" class="form-control form-control-sm" formControlName="cep">
-                </div>
-
-                <div class="form-group">
-                    <label>Bairro:</label>
-                    <input type="text" class="form-control form-control-sm" formControlName="bairro">
-                </div>
-
-                <div class="form-group">
-                    <label>Cidade:</label>
-                    <input type="text" class="form-control form-control-sm" formControlName="cidade">
-                </div>
-
-                <div class="form-group">
-                    <label>Estado:</label>
-                    <input type="text" class="form-control form-control-sm" formControlName="estado">
-                </div>
-
-                <div class="container">
-                    <div class="row">
-                    <!-- <div class="col-md-4"></div> -->
-                      <div class="col-md-6">
-                        <button type="submit" class="btn btn-sm btn-outline-success">
-                          Salvar
-                        </button>
-                      </div>
-                      <div class="col-md-6">
-                        <button type="button" class="btn btn-sm btn-outline-danger">Voltar</button>
-                      </div>
+            <hr />
+            <div class="container-form">
+                <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
+                    <div class="form-group">
+                        <label>Nome do Reciclador:</label>
+                        <input type="text" class="form-control form-control-sm" formControlName="nome">
                     </div>
-                  </div>
-            </form>
+
+                    <div class="form-group">
+                        <label>Rua:</label>
+                        <input type="text" class="form-control form-control-sm" formControlName="rua">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Número:</label>
+                        <input type="text" class="form-control form-control-sm" formControlName="numero">
+                    </div>
+
+                    <div class="form-group">
+                        <label>CEP:</label>
+                        <input type="text" class="form-control form-control-sm" formControlName="cep">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Bairro:</label>
+                        <input type="text" class="form-control form-control-sm" formControlName="bairro">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Cidade:</label>
+                        <input type="text" class="form-control form-control-sm" formControlName="cidade">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Estado:</label>
+                        <input type="text" class="form-control form-control-sm" formControlName="estado">
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="submit" class="btnSave btn-sm fa-solid fa-folder-plus">
+                                Salvar
+                            </button>
+
+                            <button type="button" class="btnReturn fa-solid fa-arrow-rotate-left" (click)="voltar()">
+                                Voltar
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <br>
+        <div class="row">
+            <br>
+            <iframe width="100%" height="450" frameborder="0" style="border:0; padding-bottom: 50px;" [src]="enderecoMap" allowfullscreen></iframe>           
         </div>
     </div>
 </div>
+
+
+
+<ng-template #conteudoModal>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Confirmação de Exclusão</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        Prosseguir com a exclusão do Endereço
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" (click)="ExcluirEndereco(enderecoId)">Sim</button>
+        <button type="button" class="btn btn-light" (click)="modalRef.hide()">Não</button>
+    </div>
+</ng-template>

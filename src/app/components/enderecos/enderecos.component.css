@@ -1,0 +1,47 @@
+.container {
+    width: 100%;
+    background: #fff;
+    margin-top: 200px;
+    border-radius: 0.2em;
+    border: solid;
+}
+
+.containe, td {
+    padding: 15px;
+}
+
+.container th {
+    padding: 15px;
+}
+
+.containers {
+    width: 100vw;
+    height: 100vh;
+    background: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.containers ,label, input {
+    padding: 10px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+
+h6 {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-size: 35px;
+}
+
+.btnSave, .btnReturn{
+    width: 100%;
+}
+
+form {
+    border: 1px solid;
+    width: 500px;
+}
+

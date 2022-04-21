@@ -30,12 +30,22 @@ export class EnderecosService {
     return this.http.post<Endereco>(this.url, endereco, httpOptions);
   }
 
-  Update(endereco: Endereco): Observable<any>{
-    return this.http.put<Endereco>(this.url, endereco, httpOptions);
+  // Update(endereco: Endereco): Observable<any>{
+  //   return this.http.put<Endereco>(this.url, endereco, httpOptions);
+  // }
+  
+  Update(endereco: Endereco): Observable<Endereco>{
+    return this.http.put<Endereco>(this.url + '/' + endereco.id , endereco, httpOptions);
+  }
+  
+  // Delete(enderecoId: number): Observable<any>{
+  //   const apiUrl = `${this.url}/${enderecoId}`;
+  //   return this.http.delete<number>(apiUrl, httpOptions);
+  // }
+
+  Delete(endereco: Endereco){
+    // const apiUrl = `${this.url}/${enderecoId}`;
+    return this.http.delete<Endereco>(this.url + '/' + endereco, httpOptions);
   }
 
-  Delete(enderecoId: number): Observable<any>{
-    const apiUrl = `${this.url}/${enderecoId}`;
-    return this.http.delete<number>(apiUrl, httpOptions);
-  }
 }
